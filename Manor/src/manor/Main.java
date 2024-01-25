@@ -87,6 +87,18 @@ public class Main
             inventory[0] = true; // adding the knife to the inventory 
             kitchen(args);
         }
+        else if(userInput.equals("BASEMENT"))
+        {
+            if(1 == 0)
+            {
+                System.out.println("With the lock undone, you descend into the basement.") ;
+            }
+            else
+            {
+                System.out.println("Maybe if you stare at this door hard enough, it'll unlock itself.") ;
+                kitchen(args);
+            }
+        }
         else
         {
             System.out.println("Not a valid choice") ;
@@ -97,33 +109,23 @@ public class Main
     public static void diningRoom (String[] args)
     {
         Scanner myScanner = new Scanner(System.in) ;
-        System.out.println("From the atrium, you could try the KITCHEN, the UPSTAIRS, the DINING ROOM, or GO BACK.") ;
+        System.out.println("The dining room is foreboding. There's a dusty MIRROR in the corner. Maybe you could reflect on why you didn't leave while you still could.") ;
         String userInput = myScanner.nextLine() ;
         
         if(userInput.equals("GO BACK"))
         {
-            System.out.println("You push the door. The door pushes back. The two of you call it a tie.") ;
+            System.out.println("You return to the atrium.") ;
             atrium(args);
         }
-        else if(userInput.equals("KITCHEN"))
+        else if(userInput.equals("MIRROR"))
         {
-            System.out.println("You push the door. The door pushes back. The two of you call it a tie.") ;
-            kitchen(args);
-        }
-        else if(userInput.equals("DINING ROOM"))
-        {
-            System.out.println("You push the door. The door pushes back. The two of you call it a tie.") ;
-            diningRoom(args);
-        }
-        else if(userInput.equals("UPSTAIRS"))
-        {
-            System.out.println("You push the door. The door pushes back. The two of you call it a tie.") ;
-            upstairs(args);
+            System.out.println("The mirror is incredibly dirty. You try and wipe away the grime, but while your sleeve absorbs gunk, the mirror doesn't seem to lose any. You can't see yourself- is that you're covered in filth, or that you're nothing worth looking at? You leave before you can decide.") ;
+            atrium(args);
         }
         else
         {
             System.out.println("Not a valid choice") ;
-            atrium(args);
+            diningRoom(args);
         }
     }
     
@@ -135,23 +137,7 @@ public class Main
         
         if(userInput.equals("GO BACK"))
         {
-            System.out.println("You push the door. The door pushes back. The two of you call it a tie.") ;
-            atrium(args);
-        }
-        else if(userInput.equals("KITCHEN"))
-        {
-            System.out.println("You push the door. The door pushes back. The two of you call it a tie.") ;
-            kitchen(args);
-        }
-        else if(userInput.equals("DINING ROOM"))
-        {
-            System.out.println("You push the door. The door pushes back. The two of you call it a tie.") ;
-            diningRoom(args);
-        }
-        else if(userInput.equals("UPSTAIRS"))
-        {
-            System.out.println("You push the door. The door pushes back. The two of you call it a tie.") ;
-            upstairs(args);
+            
         }
         else
         {
