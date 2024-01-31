@@ -53,7 +53,7 @@ public class Game {
 				"Your Relative is now laying dead on the floor.\nAmidst your adrenaline and confusion, you notice a glow coming from another ROOM in the Basement.\n",
 				true);
 		Room room = new Room("ROOM",
-				"Upon investigating this room you find a ritual table, glowing with some sort of unkown energy, in the middle of the room.\nThe power begins to course through you, tempting your mind with possibilities.\nYou can make a choice, will you SAVE your Relative curing them of their wounds and insanity, will you STEAL the power for yourself, or will you LEAVE it all behind?\n",
+				"Upon investigating this room you find a ritual table in the middle of the room, glowing with some sort of unkown energy.\nThe power begins to course through you, tempting your mind with possibilities.\nYou can make a choice, will you SAVE your Relative curing them of their wounds and insanity, will you STEAL the power for yourself, or will you LEAVE it all behind?\n",
 				true);
 
 		Room current = courtyard;
@@ -120,7 +120,6 @@ public class Game {
 
 		ArrayList<Room> b = new ArrayList<Room>() {
 			{
-				add(kitchen);
 				add(room);
 			}
 		};
@@ -145,7 +144,7 @@ public class Game {
 		bedroom.fillList(s);
 		attic.fillList(s);
 
-		// basement2.fillList(b);
+		basement2.fillList(b);
 
 		Basement base = new Basement();
 		boolean end = false;
@@ -226,5 +225,7 @@ public class Game {
 				}
 			}
 		}
+
 	}
+
 }
