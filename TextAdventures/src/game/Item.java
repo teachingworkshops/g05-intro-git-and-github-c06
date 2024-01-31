@@ -6,6 +6,7 @@ public class Item {
 	private String description;
 	private String interaction;
 	private boolean holdable;
+	private static final Object lock = new Object();
 	
 	public Item(String name, String description, String interaction, boolean holdable) {
 		
@@ -21,15 +22,28 @@ public class Item {
 	}
 	
 	public void printDescript() {
-		System.out.println(description);
+		displayString(description+"\n");
 	}
 	
 	public void printInteraction() {
-		System.out.println(interaction);
+		displayString(interaction+"\n");
 	}
 	
 	public boolean isHoldable() {
 		return holdable;
+	}
+	
+	public static void displayString(String prompt) {
+		for (char letter : prompt.toCharArray()) {
+			synchronized (lock) {
+				try {
+					lock.wait(25);
+					System.out.print(letter);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 }
