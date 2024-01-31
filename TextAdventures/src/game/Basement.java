@@ -21,7 +21,7 @@ public class Basement {
 		heirloom = pHeirloom;
 		knife = pKnife;
 		displayString(
-				"You walk through the Basement door and down the stair case to a dark cellar.\nWhile stepping into the Basement you hear a loud slam behind you. You turn to see your Relative standing between you and the staircase back to the KITCHEN.\nYour Relative brandishes a dagger and steps towrds you with madness in their eyes and ready to STRIKE.\n");
+				"You walk through the Basement door and down the staircase to a dark cellar.\nWhile stepping into the Basement you hear a loud slam behind you. You turn to see your Relative standing between you and the staircase back to the KITCHEN.\nYour Relative brandishes a dagger and steps towards you with madness in their eyes and ready to STRIKE.\n");
 		while (user_hp > 0 && rel_hp > 0) {
 			displayHP(user_hp, rel_hp);
 			combat();
