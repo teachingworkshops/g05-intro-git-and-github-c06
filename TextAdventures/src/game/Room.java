@@ -11,6 +11,7 @@ public class Room implements Comparable<Room>{
 	private String input;
 	private boolean hasItem = false;
 	private boolean unlocked = false;
+	private static final Object lock = new Object();
 	
 	private Player character;
 	private Item item;
@@ -65,7 +66,7 @@ public class Room implements Comparable<Room>{
 	public void getDescript() {
 		Scanner scan = new Scanner(System.in);
 		
-		System.out.println(description);
+		displayString(description+"\n");
 		
 		if(hasItem) {
 			item.printDescript();
@@ -102,6 +103,19 @@ public class Room implements Comparable<Room>{
 		}
 		else {
 			return this.name.compareTo(o.getName());
+		}
+	}
+	
+	public static void displayString(String prompt) {
+		for (char letter : prompt.toCharArray()) {
+			synchronized (lock) {
+				try {
+					lock.wait(25);
+					System.out.print(letter);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
