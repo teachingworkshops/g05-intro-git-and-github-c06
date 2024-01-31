@@ -90,13 +90,13 @@ public class basement {
 
     public static void ending_scene() {
         Scanner input = new Scanner(System.in);
-        displayString("Your relative is now laying dead on the floor.\nAmidst your grieving you see a glow coming from a door in the basement.\nUpon investigating this room you find a ritual table in the middle of the room.\nYou activate the ritual and are faced with a choice.\nWill you SAVE your relative of their curse or will you STEAL the power for yourself?\n");
+        displayString("Your relative is now laying dead on the floor.\nAmidst you grieving what you have done, you see a glow coming from a door in the basement.\nUpon investigating this room you find a ritual table in the middle of the room.\nYou activate the ritual and are faced with a choice.\nWill you SAVE your relative of their curse or will you STEAL the power for yourself?\n");
         String choice = input.nextLine();
         if (choice.equalsIgnoreCase("SAVE")) {
 
         }
         else if (choice.equalsIgnoreCase("STEAL")){
-
+            
         }
     }
 
@@ -186,7 +186,7 @@ public class basement {
             block();
         }
         else if (strike <= dodge) {
-            displayString("Your attack was dodged by your relative\n");
+            displayString("Your attack was dodged by your relative.\n");
         }
         else if (strike <= counter){
             counter();
@@ -196,7 +196,7 @@ public class basement {
     public static void block() {
         int timeout = 4;
         String prompt = "Your attack was blocked by your relative.\nQuickly STRIKE to follow up with another attack.\n";
-        String timeoutMessage = "You missed your attack and your relative countered with an attack\n";
+        String timeoutMessage = "You missed your attack and your relative countered with an attack.\n";
         try{
             str = getUserInputWithTimeout(timeout*1000, prompt, timeoutMessage, true);
         }
@@ -208,7 +208,7 @@ public class basement {
             rel_hp -= 2;
         }
         else if (!str.equals("no_input")) {
-            displayString("You missed your attack and your relative countered with an attack\n");
+            displayString("You missed your attack and your relative countered with an attack.\n");
             user_hp -= 2;
         }
     }
@@ -216,7 +216,7 @@ public class basement {
     public static void counter() {
         int timeout = 4;
         String prompt = "Your relative dodged your attack and countering your attack.\nQuickly DODGE to avoid the attack.\n";
-        String timeoutMessage = "You have been hit by your relative's counter\n";
+        String timeoutMessage = "You have been hit by your relative's counter.\n";
         try{
             str = getUserInputWithTimeout(timeout*1000, prompt, timeoutMessage, true);
         }
@@ -230,7 +230,7 @@ public class basement {
             if (stumble < stumble_percent) {
                 timeout = 5;
                 prompt = "Your relative stumbled after missing.\nQuickly STRIKE to throw a counter attack.\n";
-                timeoutMessage = "You missed your attack\n";
+                timeoutMessage = "You missed your attack.\n";
                 try{
                     str = getUserInputWithTimeout(timeout*1000, prompt, timeoutMessage, false);
                 }
@@ -243,15 +243,15 @@ public class basement {
                     rel_hp -= 2;
                 }
                 else if (!str.equals("no_input")) {
-                    displayString("You missed your attack\n");
+                    displayString("You missed your attack.\n");
                 }
             }
             else {
-                displayString("You dodged your relative's attack\n");
+                displayString("You dodged your relative's attack.\n");
             }
         } 
         else if (!str.equals("no_input")) {
-            displayString("You were hit by your relative's counter attack\n");
+            displayString("You were hit by your relative's counter attack.\n");
             user_hp -= 2;
         }
     }
