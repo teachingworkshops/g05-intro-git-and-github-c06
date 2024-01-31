@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Game {
+	private static final Object lock = new Object();
 
 	public static void main(String[] args) {
 
@@ -42,7 +43,7 @@ public class Game {
 		bedroom.setItem(new Item("KEY", "There seems to be a bronze KEY sitting on the top of the dresser.",
 				"You picked up the KEY.", true));
 		Room attic = new Room("ATTIC",
-				"You are in the ATTIC. You feel oddly at peace while sorrounded by all of the boxes full of things that have been long forgotten.",
+				"You are in the ATTIC. You feel oddly at peace while sorrounded by all of the boxes full of things that have been long forgotten.\nThe path behind you leads to the UPSTAIRS hallway.",
 				false);
 		attic.setItem(
 				new Item("HEIRLOOM", "You notice a family HEIRLOOM hung up on the wall, it is the ol' family rifle.",
@@ -153,19 +154,19 @@ public class Game {
 			character.move();
 
 			if (character.getCurrentRoom().compareTo(leave) == 0) {
-				System.out.println("ENDING 5: You depart back the way you came. Unsatisfied, but alive.");
+				displayString("ENDING 5: You depart back the way you came. Unsatisfied, but alive.\n");
 				end = true;
 			}
 
 			if (character.getCurrentRoom().compareTo(enter) == 0) {
-				System.out.println("You hear a loud click as the front door closes behind you.");
+				displayString("You hear a loud click as the front door closes behind you. Seems like you're locked in here now.\n");
 				current = atrium;
 			}
 
 			if (character.getCurrentRoom().compareTo(upstairs) == 0
 					&& character.getRoomInput().equalsIgnoreCase("Attic") && character.hasItem("Book")) {
-				System.out.println(
-						"You find a part of the wall that pushes in. Upon opening it, you find a dark stair case leading to the ATTIC infront of you.");
+				displayString(
+						"You find a part of the wall that pushes in. Upon opening it, you find a dark stair case leading to the ATTIC infront of you.\n");
 				attic.setUnlocked(true);
 				character.currentRoom = attic;
 				upstairs.fillList(u2);
@@ -174,26 +175,26 @@ public class Game {
 			if (character.getCurrentRoom().compareTo(kitchen) == 0) {
 
 				if (character.getRoomInput().equalsIgnoreCase("Basement") && character.hasItem("Key")) {
-					System.out.println("Unlock the BASEMENT door? (YES/NO)");
+					displayString("Unlock the BASEMENT door? (YES/NO)\n");
 					if (scan.nextLine().equalsIgnoreCase("Yes")) {
-						System.out.println(
-								"You unlock the BASEMENT door, what remains behind it is up to you to find out.");
+						displayString(
+								"You unlock the BASEMENT door, what remains behind it is up to you to find out.\n");
 						character.useItem("Key");
 						character.getCurrentRoom().addRoom(basement1);
 						basement1.setUnlocked(true);
 					} else if (scan.nextLine().equalsIgnoreCase("No")) {
-						System.out.println("You leave the BASEMENT door locked, maybe for the better...");
+						displayString("You leave the BASEMENT door locked, maybe for the better...\n");
 					}
 				} else if (character.getRoomInput().equalsIgnoreCase("Basement")) {
-					System.out.println(
-							"The BASEMENT door appears to be locked. There must be a KEY somewhere to unlock it.");
+					displayString(
+							"The BASEMENT door appears to be locked. There must be a KEY somewhere to unlock it.\n");
 				}
 			}
 
 			if (character.getCurrentRoom().compareTo(diningRoom) == 0) {
 				if (character.getRoomInput().equalsIgnoreCase("Mirror")) {
-					System.out.println(
-							"The mirror is incredibly dirty. You try and wipe away the grime, but the mirror doesn't seem to lose any and you remain unable to see yourself.");
+					displayString(
+							"The mirror is incredibly dirty. You try and wipe away the grime, but the mirror doesn't seem to lose any and you remain unable to see yourself.\n");
 				}
 			}
 
@@ -201,7 +202,7 @@ public class Game {
 				String result = base.Basement(character.hasItem("Heirloom"), character.hasItem("Knife"));
 
 				if (result.equals("lose")) {
-					System.out.println("ENDING 4: You are dead.");
+					displayString("ENDING 4: You are dead.\n");
 					end = true;
 				} else if (result.equals("win")) {
 					kitchen.fillList(k3);
@@ -211,21 +212,34 @@ public class Game {
 
 			if (character.getCurrentRoom().compareTo(room) == 0) {
 				if (character.getRoomInput().equalsIgnoreCase("Leave")) {
-					System.out.println(
-							"ENDING 1: This is all too much for you.\nWhatever ritual magic this is should not be messed with.\nYou head out the front door, now somehow unlocked, exhausted and ready to leave the Manor behind for good.");
+					displayString(
+							"ENDING 1: This is all too much for you.\nWhatever ritual magic this is should not be messed with.\nYou head out the front door, now somehow unlocked, exhausted and ready to leave the Manor behind for good.\n");
 					end = true;
 				} else if (character.getRoomInput().equalsIgnoreCase("Save")) {
-					System.out.println(
-							"ENDING 2: You ignore the temptation of power and channel the energy into your dead Relative.\nYour Relative stirs and stands up, they seem to be as confused as you are and seem to have no memory of setting up or activating the ritual.\nYou and your Relative head out the front door, now somehow unlocked, exhausted and ready to leave the Manor behind for good, though that thought may not be shared by your Relative.");
+					displayString(
+							"ENDING 2: You ignore the temptation of power and channel the energy into your dead Relative.\nYour Relative stirs and stands up, they seem to be as confused as you are and seem to have no memory of setting up or activating the ritual.\nYou and your Relative head out the front door, now somehow unlocked, exhausted and ready to leave the Manor behind for good, though that thought may not be shared by your Relative.\n");
 					end = true;
 				} else if (character.getRoomInput().equalsIgnoreCase("Steal")) {
-					System.out.println(
-							"ENDING 3: Yes, yes, the whispers are correct.\nThis power should not be wasted, especially when it can give you everything you have ever wanted!\nYou head out the front door, now somehow unlocked, ready to claim what is yours and ecstatic to test your new powers on any who get in your way.");
+					displayString(
+							"ENDING 3: Yes, yes, the whispers are correct.\nThis power should not be wasted, especially when it can give you everything you have ever wanted!\nYou head out the front door, now somehow unlocked, ready to claim what is yours and ecstatic to test your new powers on any who get in your way.\n");
 					end = true;
 				}
 			}
 		}
 
+	}
+	
+	public static void displayString(String prompt) {
+		for (char letter : prompt.toCharArray()) {
+			synchronized (lock) {
+				try {
+					lock.wait(25);
+					System.out.print(letter);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 }
