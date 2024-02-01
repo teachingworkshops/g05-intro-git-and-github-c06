@@ -10,7 +10,7 @@ public class Game {
 	public static void main(String[] args) {
 
 		Room courtyard = new Room("COURTYARD",
-				"TO PLAY THIS GAME TRY TYPING THE CAPITALIZED WORDS YOU SEE\n\nAfter recieving a worrisome letter about your Relative, you find yourself standing in the COURTYARD of your Relatives decrepit looking manor.\nYou could ENTER through the front door, or simply LEAVE.",
+				"TO PLAY THIS GAME TRY TYPING THE CAPITALIZED WORDS YOU SEE\n\nAfter receiving a worrisome letter about your Relative, you find yourself standing in the COURTYARD of your Relatives decrepit looking manor.\nYou could ENTER through the front door, or simply LEAVE.",
 				true);
 		Room enter = new Room("ENTER",
 				"You find yourself in the ATRIUM. you notice three paths leading to the KITCHEN, the DINING ROOM, or UPSTAIRS",
@@ -20,41 +20,41 @@ public class Game {
 		Room atrium = new Room("ATRIUM",
 				"From the ATRIUM, you notice three paths leading to the KITCHEN, the DINING ROOM, or UPSTAIRS", true);
 		Room kitchen = new Room("KITCHEN",
-				"You enter the KITCHEN and immediately smell rot. You notice a door to the ATRIUM but also another bronze door, seemingly leading to the BASEMENT.",
+				"You are in the KITCHEN and immediately smell rot. You notice a door to the ATRIUM but also another bronze door, seemingly leading to the BASEMENT.",
 				true);
 		kitchen.setItem(new Item("KNIFE", "You see a KNIFE embedded in what you're fairly sure is a pig carcass.",
-				"You pull the KNIFE from the carcass and take it with you. It looks awful and smell worse.", true));
+				"You pull the KNIFE from the carcass and take it with you. It looks awful and smells worse.", true));
 		Room diningRoom = new Room("DINING ROOM",
 				"The DINING ROOM is foreboding. There's a dusty MIRROR in the corner. Maybe you could reflect on what led you to be trapped in the Manor of your Relative or head back to the ATRIUM.",
 				true);
 
 		Room upstairs = new Room("UPSTAIRS",
-				"You enter the UPSTAIRS hallway. You see one entrance to the STUDY and another to the BEDROOM. Looking down the stairs you see the ATRIUM.",
+				"You are in the UPSTAIRS hallway. You see one entrance to the STUDY and another to the BEDROOM. Looking down the stairs you see the ATRIUM.",
 				true);
 		Room study = new Room("STUDY",
-				"You enter the STUDY. You're not sure which is older, the cobwebs or the books. Behind you is the door to the UPSTAIRS hallway.",
+				"You are in the STUDY. You're not sure which is older, the cobwebs or the books. Behind you is the door to the UPSTAIRS hallway.",
 				true);
-		study.setItem(new Item("BOOK", "One BOOK however seems to have been used recently.",
+		study.setItem(new Item("BOOK", "One BOOK, however, seems to have been used recently.",
 				"You read the BOOK. It talks about an additional entrance to the ATTIC from the UPSTAIRS hallway.",
 				true));
 		Room bedroom = new Room("BEDROOM",
-				"You enter the BEDROOM, the bed seems dusty from lack of use. Behind you is a door to the UPSTAIRS hallway.",
+				"You are in the BEDROOM, the bed seems dusty from lack of use. Behind you is a door to the UPSTAIRS hallway.",
 				true);
 		bedroom.setItem(new Item("KEY", "There seems to be a bronze KEY sitting on the top of the dresser.",
 				"You picked up the KEY.", true));
 		Room attic = new Room("ATTIC",
-				"You are in the ATTIC. You feel oddly at peace while sorrounded by all of the boxes full of things that have been long forgotten.\nThe path behind you leads to the UPSTAIRS hallway.",
+				"You are in the ATTIC. You feel oddly at peace while surrounded by all of the boxes full of things that have been long forgotten.\nThe path behind you leads to the UPSTAIRS hallway.",
 				false);
 		attic.setItem(
 				new Item("HEIRLOOM", "You notice a family HEIRLOOM hung up on the wall, it is the ol' family rifle.",
-						"You picked up the HIERLOOM rifle", true));
+						"You picked up the HEIRLOOM rifle", true));
 
 		Room basement1 = new Room("BASEMENT", "You are in the BASEMENT.", false);
 		Room basement2 = new Room("BASEMENT",
-				"Your Relative is now laying dead on the floor.\nAmidst your adrenaline and confusion, you notice a glow coming from another ROOM in the Basement.\n",
+				"Your Relative is now lying dead on the floor.\nAmidst your adrenaline and confusion, you notice a glow coming from another ROOM in the Basement.\n",
 				true);
 		Room room = new Room("ROOM",
-				"Upon investigating this room you find a ritual table in the middle of the room, glowing with some sort of unkown energy.\nThe power begins to course through you, tempting your mind with possibilities.\nYou can make a choice, will you SAVE your Relative curing them of their wounds and insanity, will you STEAL the power for yourself, or will you LEAVE it all behind?\n",
+				"Upon investigating this room you find a ritual table in the middle of the room, glowing with some sort of unknown energy.\nThe power begins to course through you, tempting your mind with possibilities.\nYou can make a choice, will you SAVE your Relative curing them of their wounds and insanity, will you STEAL the power for yourself, or will you LEAVE it all behind?\n",
 				true);
 
 		Room current = courtyard;
@@ -75,22 +75,6 @@ public class Game {
 
 		};
 
-		ArrayList<Room> k2 = new ArrayList<Room>() {
-			{
-				add(atrium);
-				add(basement1);
-			}
-
-		};
-
-		ArrayList<Room> k3 = new ArrayList<Room>() {
-			{
-				add(atrium);
-				add(basement2);
-			}
-
-		};
-
 		ArrayList<Room> a = new ArrayList<Room>() {
 			{
 				add(kitchen);
@@ -105,16 +89,6 @@ public class Game {
 				add(atrium);
 				add(study);
 				add(bedroom);
-			}
-
-		};
-
-		ArrayList<Room> u2 = new ArrayList<Room>() {
-			{
-				add(atrium);
-				add(study);
-				add(bedroom);
-				add(attic);
 			}
 
 		};
@@ -168,8 +142,8 @@ public class Game {
 				displayString(
 						"You find a part of the wall that pushes in. Upon opening it, you find a dark stair case leading to the ATTIC infront of you.\n");
 				attic.setUnlocked(true);
+				upstairs.addRoom(attic);
 				character.currentRoom = attic;
-				upstairs.fillList(u2);
 			}
 
 			if (character.getCurrentRoom().compareTo(kitchen) == 0) {
@@ -205,7 +179,7 @@ public class Game {
 					displayString("ENDING 4: You are dead.\n");
 					end = true;
 				} else if (result.equals("win")) {
-					kitchen.fillList(k3);
+					kitchen.addRoom(basement2);
 					character.currentRoom = basement2;
 				}
 			}
