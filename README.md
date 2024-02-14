@@ -1,5 +1,5 @@
 ## Summary
-A text-based adventure game created by Devin Coles, Aidan Gonzalez, Chelsea Onuska, and Scott Wilder.
+A text-based adventure game created by Devin Coles, Aidan Gonzalez, Chelsea Onuska, and Wilder Scott.
 
 ## Run Intructions
 1. Download the TextAdventure.jar file.
