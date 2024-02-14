@@ -9,3 +9,6 @@ A text-based adventure game created by Devin Coles, Aidan Gonzalez, Chelsea Onus
 
 ## Directions
 The once the text is displayed completely, there will be words that are capatilized. These words are the vaild inputs the user can type in. Once typed in, hit the 'Enter' key in order to input the value. The player will move to the room the corresponds with the input.
+
+## Background
+This game was created as part of a COMP4960 activity at WIT.
