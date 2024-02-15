@@ -13,12 +13,12 @@ public class Game {
 				"TO PLAY THIS GAME TRY TYPING THE CAPITALIZED WORDS YOU SEE\n\nAfter receiving a worrisome letter about your Relative, you find yourself standing in the COURTYARD of your Relatives decrepit looking manor.\nYou could ENTER through the front door, or simply LEAVE.",
 				true);
 		Room enter = new Room("ENTER",
-				"You find yourself in the ATRIUM. you notice three paths leading to the KITCHEN, the DINING ROOM, or UPSTAIRS",
+				"You find yourself in the ATRIUM. you notice four paths leading to the KITCHEN, the DINING ROOM, the GARDEN, or UPSTAIRS",
 				true);
 		Room leave = new Room("LEAVE", "", true);
 
 		Room atrium = new Room("ATRIUM",
-				"From the ATRIUM, you notice three paths leading to the KITCHEN, the DINING ROOM, or UPSTAIRS", true);
+				"From the ATRIUM, you notice four paths leading to the KITCHEN, the DINING ROOM, the GARDEN, or UPSTAIRS", true);
 		Room kitchen = new Room("KITCHEN",
 				"You are in the KITCHEN and immediately smell rot. You notice a door to the ATRIUM but also another bronze door, seemingly leading to the BASEMENT.",
 				true);
@@ -27,7 +27,9 @@ public class Game {
 		Room diningRoom = new Room("DINING ROOM",
 				"The DINING ROOM is foreboding. There's a dusty MIRROR in the corner. Maybe you could reflect on what led you to be trapped in the Manor of your Relative or head back to the ATRIUM.",
 				true);
-
+		Room garden = new Room("GARDEN",
+				"You are in the GARDEN. The area is overrun by unnaturally large vines with sharp THORNS. You might be able to use break one off to use as a weapon, or head back to the ATRIUM.",
+				true);
 		Room upstairs = new Room("UPSTAIRS",
 				"You are in the UPSTAIRS hallway. You see one entrance to the STUDY and another to the BEDROOM. Looking down the stairs you see the ATRIUM.",
 				true);
@@ -80,6 +82,7 @@ public class Game {
 				add(kitchen);
 				add(upstairs);
 				add(diningRoom);
+				add(garden);
 			}
 
 		};
@@ -113,6 +116,7 @@ public class Game {
 		atrium.fillList(a);
 		kitchen.fillList(k);
 		diningRoom.fillList(k);
+		garden.fillList(k);
 
 		upstairs.fillList(u);
 		study.fillList(s);
@@ -169,6 +173,13 @@ public class Game {
 				if (character.getRoomInput().equalsIgnoreCase("Mirror")) {
 					displayString(
 							"The mirror is incredibly dirty. You try and wipe away the grime, but the mirror doesn't seem to lose any and you remain unable to see yourself.\n");
+				}
+			}
+			
+			if (character.getCurrentRoom().compareTo(garden) == 0) {
+				if (character.getRoomInput().equalsIgnoreCase("THORNS")) {
+					displayString(
+							"You struggle to break one of the THORNS off, but your efforts are in vain. After a minute or two you give up.\n");
 				}
 			}
 
