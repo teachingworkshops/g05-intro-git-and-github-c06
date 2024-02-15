@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Basement {
 	public static boolean heirloom = false;
-	public static boolean knife = true;
+	public static boolean knife = false;
 	public static int user_hp = 10;
 	public static int rel_hp = 10;
 	private static String str = "";
@@ -134,14 +134,75 @@ public class Basement {
 		boolean input_not_valid = true;
 		String[] available_inputs = null;
 		String option = "";
+
+		String equipOption;
+
+		if(knife && heirloom){
+			displayString("Do you want to use your KNIFE, your GUN or your FISTS?");
+			while(true){
+			equipOption = input.nextLine();
+
+			if(equipOption.equalsIgnoreCase("knife")){
+				knife = true;
+				heirloom = false;
+				break;
+			}else if(equipOption.equalsIgnoreCase("gun")){
+				knife = false;
+				heirloom = true;
+				break;
+			}else if(equipOption.equalsIgnoreCase("fists")){
+				knife = false;
+				heirloom = false;
+				break;
+			}else{
+				displayString("Must choose a valid option");
+			}
+		}
+			
+		}else if(heirloom){
+			displayString("Do you want to use your GUN or your FISTS?");
+			while(true){
+				equipOption = input.nextLine();
+	
+				if(equipOption.equalsIgnoreCase("gun")){
+					knife = false;
+					heirloom = true;
+					break;
+				}else if(equipOption.equalsIgnoreCase("fists")){
+					knife = false;
+					heirloom = false;
+					break;
+				}else{
+					displayString("Must choose a valid option");
+				}
+			}
+
+		}else if(knife){
+			displayString("Do you want to use your KNIFE or your FISTS?");
+
+			while(true){
+				equipOption = input.nextLine();
+	
+				if(equipOption.equalsIgnoreCase("knife")){
+					knife = true;
+					heirloom = false;
+					break;
+				}else if(equipOption.equalsIgnoreCase("fists")){
+					knife = false;
+					heirloom = false;
+					break;
+				}else{
+					displayString("Must choose a valid option");
+				}
+			}
+		}
+
 		if (heirloom) {
 			basement += "You have the family heirloom, you can SHOOT to obliterate your relative.\n";
 		} else if (knife) {
 			basement += "You have a knife, you can STRIKE to try to kill your relative.\n";
 		} else {
-			basement += "You have nothing to defend yourself with as your relative rushes you and brutally kills you.\n";
-			user_hp = 0;
-			input_not_valid = false;
+			basement += "You raise your fists, you can PUNCH to try and massacre your relative.\n";
 		}
 		displayString(basement);
 		if (input_not_valid) {
@@ -164,6 +225,8 @@ public class Basement {
 			knife_combat();
 		} else if (option.equalsIgnoreCase("SHOOT")) {
 			rel_hp = 0;
+		}else if (option.equalsIgnoreCase("PUNCH")){
+			fist_combat();
 		}
 	}
 
@@ -174,12 +237,33 @@ public class Basement {
 		}
 		if (heirloom) {
 			inputs.add("SHOOT");
+		}else{
+			inputs.add("PUNCH");
+
 		}
 		String[] str_inputs = inputs.toArray(new String[0]);
 		return str_inputs;
 	}
 
 	public static void knife_combat() {
+		double strike = Math.random();
+		double hit = 0.45;
+		double block = 0.60;
+		double dodge = 0.70;
+		double counter = 1;
+		if (strike <= hit) {
+			rel_hp -= 2;
+			displayString("Your attack landed wounding your relative.\n");
+		} else if (strike <= block) {
+			block();
+		} else if (strike <= dodge) {
+			displayString("Your attack was dodged by your relative.\n");
+		} else if (strike <= counter) {
+			counter();
+		}
+	}
+
+	public static void fist_combat() {
 		double strike = Math.random();
 		double hit = 0.45;
 		double block = 0.60;
